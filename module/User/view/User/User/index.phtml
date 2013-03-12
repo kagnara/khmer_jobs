@@ -1,0 +1,113 @@
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: jfzqnuuz7z00
+  onLoad: onLinkedInLoad
+  scope: r_fullprofile,r_basicprofile
+</script>
+
+<input type="hidden">
+
+<!-- NOTE: be sure to set onLoad: onLinkedInLoad -->
+<script type="text/javascript">
+function onLinkedInLoad() {
+  IN.Event.on(IN, "auth", function() {onLinkedInLogin();});
+  IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
+}
+setLoginBadge(true);
+alert(j+","+k);
+function onLinkedInLogout() {
+  setLoginBadge(false);
+}
+
+function onLinkedInLogin() {
+  // we pass field selectors as a single parameter (array of strings)
+  IN.API.Profile("me")
+    .fields(["id", "firstName", "lastName","dateOfBirth","positions:(title,summary,startDate,endDate,company:(name))",
+             "educations:(schoolName,fieldOfStudy,startDate,endDate,degree,activities,notes)","pictureUrl",
+             "interests"])
+    .result(function(result) {
+      setLoginBadge(result.values[0]);
+    })
+    .error(function(err) {
+      alert(err);
+    });
+}
+
+function setLoginBadge(profile) {
+    var pos_title = new Array();
+    var pos_company = new Array();
+    var pos_date = new Array();
+    var pos_summary = new Array();
+    var edu_schoolName = new Array();
+    var edu_fieldOfStudy = new Array();
+    var edu_date = new Array();
+    var edu_degree = new Array();
+    var edu_activities = new Array();
+    var edu_notes = new Array();
+    
+  if (!profile) {
+    profHTML = "<p>You are not logged in</p>";
+  }
+  else {
+    var first_name = profile.firstName;
+    var last_name = profile.lastName;
+    var j=profile.positions._total;
+    var k=profile.educations._total;
+    for (var i=0;i<j;i++){
+        pos_title[i] = profile.positions.values[i].title;
+        pos_company[i] = profile.positions.values[i].company.name;
+        pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>"+ profile.positions.values[i].endDate.month +"-"+ profile.positions.values[i].endDate.year+"</i>";
+        pos_summary[i] = "SUMMARY : "+profile.positions.values[i].summary;
+    }
+    //education
+    for(var i=0;i<k;i++){
+        edu_schoolName[i] = profile.educations.values[i].schoolName;
+        edu_fieldOfStudy[i] =profile.educations.values[i].fieldOfStudy;
+        edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+        edu_degree[i] =profile.educations.values[i].degree;
+        edu_activities[i] = "ACTIVITIES : "+profile.educations.values[i].activities;
+        edu_notes[i] ="NOTES : "+profile.educations.values[i].notes;
+    }
+    //additional info
+    var interest = profile.interests;
+    var dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
+    var pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
+    //profHTML = "<p><a href=\"" + profile.publicProfileUrl + "\">";
+    profHTML = "<p><img src=\"" + pictureUrl + "\"></a>&nbsp";      
+    profHTML = profHTML + first_name + " " +last_name + "</a><br> <a onclick=\"IN.User.logout(); return false;\">logout</a>";
+    profHTML = profHTML + "<hr width=600px align='left'>";
+    profHTML = profHTML + "<h2>EXPERIENCES</h2>";
+    for(var i=0;i<j;i++){
+        profHTML = profHTML + "<b>"+pos_title[i]+"</b><br>";
+        profHTML = profHTML + pos_company[i]+"<br>";
+        profHTML = profHTML + pos_date[i]+"<br>";
+        profHTML = profHTML + "<div style='width:550px;'>"+pos_summary[i]+"</div>";
+        profHTML = profHTML +"<br>";
+    }
+    profHTML = profHTML + "<hr width=600px align='left'>";
+    profHTML = profHTML + "<h2>EDUCATION</h2>";
+    for(var i=0;i<k;i++){
+        profHTML = profHTML + "<b>"+edu_schoolName[i]+"</b><br>";
+        profHTML = profHTML + "Field of Study : "+edu_fieldOfStudy[i]+"<br>";
+        profHTML = profHTML + edu_date[i]+"<br>";
+        profHTML = profHTML + "Degree : "+edu_degree[i]+"<br>";
+        profHTML = profHTML + edu_activities[i]+"<br>";
+        profHTML = profHTML + edu_notes[i]+"<br>";
+        profHTML = profHTML +"<br>";
+    }
+    profHTML = profHTML + "<hr width=600px align='left'>";
+    profHTML = profHTML + "<h2>ADDITIONAL INFORMATION</h2>";
+    profHTML = profHTML + "Interest : "+interest+"<br>";
+    profHTMl = profHTML + "Date of Birth : "+dateOfBirth+"<br>";
+    profHTML = profHTMl + "</p>";
+  }
+  document.getElementById("loginbadge").innerHTML = profHTML;
+}
+</script>
+
+<!-- need to be logged in to use; if not, offer a login button -->
+<script type="IN/Login"></script>
+
+<div id="loginbadge">
+  <p></p>
+</div>
