@@ -57,12 +57,16 @@ function setLoginBadge(profile) {
         
         pos_title[i] = profile.positions.values[i].title;
         pos_company[i] = profile.positions.values[i].company.name;
-        alert(profile.positions.values[0].endDate);
-//        if((profile.positions.values[i]!= null)||(profile.positions.values[i])!= null){
-//            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>"+ profile.positions.values[i].endDate.month +"-"+ profile.positions.values[i].endDate.year+"</i>";
-//        }else{
-//            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month;
-//        }
+        //alert(profile.positions.values[0].endDate);
+        if((profile.positions.values[i].startDate == null)&&(profile.positions.values[i].endDate != null)){
+            pos_date[i]="FROM <i>Unknow</i> TO <i>"+profile.positions.values[i].endDate.month +"-"+profile.positions.values[i].endDate.year +"</i>";
+        }else if((profile.positions.values[i].startDate != null)&&(profile.positions.values[i].endDate == null)){
+             pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>Unknow</i>";
+        }else if((profile.positions.values[i].startDate != null)&&(profile.positions.values[i].endDate != null)){
+            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> To <i>"+profile.positions.values[i].endDate.month +"-"+profile.positions.values[i].endDate.year+"</i>";
+        }else{
+            pos_date[i]="<i>Unknow</i>";
+        }
         pos_summary[i] = profile.positions.values[i].summary;
         
     }
@@ -70,16 +74,29 @@ function setLoginBadge(profile) {
     for(var i=0;i<k;i++){
         edu_schoolName[i] = profile.educations.values[i].schoolName;
         edu_fieldOfStudy[i] =profile.educations.values[i].fieldOfStudy;
-//        if(profile.educations.values[i].startDate.year != null){
-//        edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
-//        }
+        
+        if((profile.educations.values[i].startDate == null)&&(profile.educations.values[i].endDate != null)){
+            edu_date[i] ="FROM <i>Unknow</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+        }else if((profile.educations.values[i].endDate == null)&&(profile.educations.values[i].startDate != null)){
+             edu_date[i] ="FROM <i>Unknow</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+        }else if ((profile.educations.values[i].startDate != null)&&(profile.educations.values[i].endDate != null)){
+            edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+        }else{
+            edu_date[i]="<i>Unknow</i>"
+        }
+        
         edu_degree[i] =profile.educations.values[i].degree;
         edu_activities[i] = profile.educations.values[i].activities;
         edu_notes[i] =profile.educations.values[i].notes;
     }
     //additional info
     var interest = profile.interests;
-    var dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
+    var dateOfBirth;
+    if((profile.dateOfBirth != null)){
+        dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
+    }else{
+    dateOfBirth = "<i>Unknow</i>"
+    }
     var pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
     //profHTML = "<p><a href=\"" + profile.publicProfileUrl + "\">";
     profHTML = "<p><img src=\"" + pictureUrl + "\"></a>&nbsp";      
