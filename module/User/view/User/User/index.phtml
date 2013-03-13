@@ -54,19 +54,28 @@ function setLoginBadge(profile) {
     var j=profile.positions._total;
     var k=profile.educations._total;
     for (var i=0;i<j;i++){
+        
         pos_title[i] = profile.positions.values[i].title;
         pos_company[i] = profile.positions.values[i].company.name;
-        pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>"+ profile.positions.values[i].endDate.month +"-"+ profile.positions.values[i].endDate.year+"</i>";
-        pos_summary[i] = "SUMMARY : "+profile.positions.values[i].summary;
+        alert(profile.positions.values[0].endDate);
+//        if((profile.positions.values[i]!= null)||(profile.positions.values[i])!= null){
+//            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>"+ profile.positions.values[i].endDate.month +"-"+ profile.positions.values[i].endDate.year+"</i>";
+//        }else{
+//            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month;
+//        }
+        pos_summary[i] = profile.positions.values[i].summary;
+        
     }
     //education
     for(var i=0;i<k;i++){
         edu_schoolName[i] = profile.educations.values[i].schoolName;
         edu_fieldOfStudy[i] =profile.educations.values[i].fieldOfStudy;
-        edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+//        if(profile.educations.values[i].startDate.year != null){
+//        edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+//        }
         edu_degree[i] =profile.educations.values[i].degree;
-        edu_activities[i] = "ACTIVITIES : "+profile.educations.values[i].activities;
-        edu_notes[i] ="NOTES : "+profile.educations.values[i].notes;
+        edu_activities[i] = profile.educations.values[i].activities;
+        edu_notes[i] =profile.educations.values[i].notes;
     }
     //additional info
     var interest = profile.interests;
@@ -80,8 +89,8 @@ function setLoginBadge(profile) {
     for(var i=0;i<j;i++){
         profHTML = profHTML + "<b>"+pos_title[i]+"</b><br>";
         profHTML = profHTML + pos_company[i]+"<br>";
-        profHTML = profHTML + pos_date[i]+"<br>";
-        profHTML = profHTML + "<div style='width:550px;'>"+pos_summary[i]+"</div>";
+        profHTML = profHTML + "DATE : "+pos_date[i]+"<br>";
+        profHTML = profHTML + "SUMMARY : <div style='width:550px; padding-left:40px;'>"+pos_summary[i]+"</div>";
         profHTML = profHTML +"<br>";
     }
     profHTML = profHTML + "<hr width=600px align='left'>";
@@ -89,10 +98,10 @@ function setLoginBadge(profile) {
     for(var i=0;i<k;i++){
         profHTML = profHTML + "<b>"+edu_schoolName[i]+"</b><br>";
         profHTML = profHTML + "Field of Study : "+edu_fieldOfStudy[i]+"<br>";
-        profHTML = profHTML + edu_date[i]+"<br>";
+        profHTML = profHTML + "DATE : "+edu_date[i]+"<br>";
         profHTML = profHTML + "Degree : "+edu_degree[i]+"<br>";
-        profHTML = profHTML + edu_activities[i]+"<br>";
-        profHTML = profHTML + edu_notes[i]+"<br>";
+        profHTML = profHTML + "ACTIVITIES : <div style='width:550px; padding-left:40px;'>"+edu_activities[i]+"</div>";
+        profHTML = profHTML + "NOTES : <div style='width:550px; padding-left:40px;'>"+edu_notes[i]+"</div>";
         profHTML = profHTML +"<br>";
     }
     profHTML = profHTML + "<hr width=600px align='left'>";
