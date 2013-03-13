@@ -2,7 +2,12 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
+<<<<<<< HEAD
         //'Application',
+=======
+        'Application',
+        'User',
+>>>>>>> 82226fcc95cfa42240cec90f1e04f1ba8cd2834d
 	//'SanAuth',
 	//'ZfcUser',
 	//'Album',
