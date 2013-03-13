@@ -7,10 +7,14 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace Job;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Job\Model\Job;
+use Job\Model\JobTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
@@ -34,6 +38,28 @@ class Module
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
+            ),
+        );
+    }
+// Add these import statements:
+    // getAutoloaderConfig() and getConfig() methods here
+
+    // Add this method:
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Job\Model\JobTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobTableGateway');
+                    $table = new AlbumTable($tableGateway);
+                    return $table;
+                },
+                'JobTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Job());
+                    return new TableGateway('job', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
         );
     }
