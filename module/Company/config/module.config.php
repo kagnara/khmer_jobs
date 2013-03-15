@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Job\Controller\Job',
+                        'controller' => 'Company\Controller\Company',
                         'action'     => 'index',
                     ),
                 ),
@@ -24,31 +24,33 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'job' => array(
+            'company' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/job',
+                    'route'    => '/company',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Job\Controller',
-                        'controller'    => 'Job',
+                        '__NAMESPACE__' => 'Company\Controller',
+                        'controller'    => 'Company',
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                    'post' => array(
+			'type'    => 'segment',
+			'options' => array(
+                            'route'    => '/post[/:action][/:id]',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+				'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+				'id'     => '[0-9]+',
+				),
+			'defaults' => array(
+                            'controller' => 'Company\Controller\Company',
+                            'action'     => 'post',
+			),
                     ),
-                ),
+		  ),
+               ),
             ),
         ),
     ),
@@ -69,7 +71,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Job\Controller\Job' => 'Job\Controller\JobController'
+            'Company\Controller\Company' => 'Company\Controller\CompanyController'
         ),
     ),
     'view_manager' => array(

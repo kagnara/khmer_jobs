@@ -7,16 +7,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Job\Controller;
+namespace Company\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class JobController extends AbstractActionController
+class CompanyController extends AbstractActionController
 {
     public function indexAction()
     {
         return new ViewModel();
     }
-   
+    public function postAction()
+    {
+        
+    }
 }
