@@ -1,2 +1,4 @@
 <?php
-return array();
+return array(
+    'Facebook' => 'vendor/FB/facebook.php',
+);
