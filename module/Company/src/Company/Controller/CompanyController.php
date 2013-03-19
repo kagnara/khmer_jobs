@@ -11,6 +11,7 @@ namespace Company\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Company\Form\CompanyForm;
 
 class CompanyController extends AbstractActionController
 {
@@ -22,4 +23,17 @@ class CompanyController extends AbstractActionController
     {
         
     }
+	public function addAction()
+    {
+        $form = new CompanyForm();
+		$form->get('submit')->setValue('Add');
+		return array('form'=>$form);
+    }
+	public function editAction()
+    {
+        $form = new CompanyForm();
+		$form->get('submit')->setValue('Add');
+		return array('form'=>$form);
+    }
+	
 }

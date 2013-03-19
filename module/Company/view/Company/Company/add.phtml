@@ -1,0 +1,29 @@
+<?php
+// module/Company/view/Company/Company/add.phtml:
+
+$title = 'Add new job';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+//$form->setAttribute('action', $this->url('company/add', array('action' => 'add')));
+//$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form_element">
+<?php
+//echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('title'));
+echo $this->formRow($form->get('artist'));
+echo $this->formRow($form->get('message'));
+echo $this->formRow($form->get('phoneNumber'));
+
+//echo $this->formInput($form->get('message'));
+//echo $this->formElement($form->get('message'));
+?>
+</div>
+<?php
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
