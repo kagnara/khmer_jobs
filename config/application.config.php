@@ -4,9 +4,9 @@ return array(
     'modules' => array(
        // 'Application',
        // 'User',
-	//'ZfcUser',
+	'ZfcUser',
         'Company',
-        // 'Job',
+         'Job',
 	
 	
 		
