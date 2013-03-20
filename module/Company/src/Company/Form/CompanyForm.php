@@ -1,6 +1,5 @@
 <?php
 namespace Company\Form;
-
 use Zend\Form\Form;
 
 class CompanyForm extends Form
@@ -50,18 +49,51 @@ class CompanyForm extends Form
 			'name' => 'message',
 			'attributes' =>array(
 				'type' => 'textarea',
+				'options' => array(
+			),
+			'label' => 'Message:',
+				'required' => 'required',
+                                'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
+			),
+		));
+                $this->add(array(
+			'name' => 'imageFile',
+			'attributes' =>array(
+				'type' => 'file',
 			),
 			'options' => array(
-				'label' => 'Message:',
+				'label' => 'File Upload:',
 				'required' => 'required',
                 'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
 			),
 		));
-		
-		
-	//	$message = new Element\Textarea('message');
-	//$message->setLabel('Message');
-		
+                
+                 $this->add(array(
+			'name' => 'closeDate',
+			'attributes' =>array(
+				'type' => 'date',
+			),
+			'options' => array(
+				'label' => 'Close date:',
+				'required' => 'required',
+			),
+		));
+                  $this->add(array(
+                    'type' => 'Zend\Form\Element\Select',
+                    'name' => 'gender',
+                    'options' => array(
+                        'label' => 'Gender:',
+                        'value_options' => array(
+                            '1' => 'Select your gender',
+                            '2' => 'Female',
+                            '3' => 'Male',
+                        ),
+                    ),
+                    'attributes' => array(
+                        'value' => '1' //set selected to '1'
+            ),
+        ));
+               		
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
