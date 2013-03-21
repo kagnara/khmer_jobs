@@ -10,7 +10,7 @@ return array(
             'user' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user',
+                    'route'    => '/userdata',
                     'constraints' => array(
                         'action' => 'index',
                        
