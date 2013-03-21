@@ -35,5 +35,10 @@ class CompanyController extends AbstractActionController
 		$form->get('submit')->setValue('Add');
 		return array('form'=>$form);
     }
+    public function listAction()
+    {
+        
+    } 
+    
 	
 }

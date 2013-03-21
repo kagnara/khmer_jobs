@@ -19,10 +19,12 @@ class CompanyForm extends Form
             'name' => 'title',
             'attributes' => array(
                 'type'  => 'text',
+                'placeholder' => 'title',
             ),
             'options' => array(
                 'label' => 'Title:',
-            ),
+               
+            ),  
         ));
         $this->add(array(
             'name' => 'artist',
@@ -49,11 +51,11 @@ class CompanyForm extends Form
 			'name' => 'message',
 			'attributes' =>array(
 				'type' => 'textarea',
-				'options' => array(
 			),
-			'label' => 'Message:',
-				'required' => 'required',
-                                'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
+                        'options' => array(
+                            'label' => 'Message:',
+                            'required' => 'required',
+                            'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
 			),
 		));
                 $this->add(array(
