@@ -21,6 +21,21 @@ return array(
                     ),
                 ),
             ),
+            'insertdb' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/insertdb',
+                    'constraints' => array(
+                        'action' => 'index',
+                       
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'insertdb',
+                    ),
+                ),
+            ),
+            
             'facebook' => array(
                 'type'    => 'segment',
                 'options' => array(

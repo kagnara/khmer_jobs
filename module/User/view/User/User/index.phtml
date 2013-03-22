@@ -133,12 +133,10 @@ function setLoginBadge(profile) {
   document.getElementById("first_name").value=first_name;
   document.getElementById("last_name").value = last_name;
   document.getElementById("interest").value = interest;
-  document.getElementById("j").value =j;
+//  document.getElementById("j").value =j;
+//  document.getElementById("j").submit();
 }
-function formSubmit()
-{
-document.getElementById("form").submit();
-}
+
 </script>
 
 <!-- need to be logged in to use; if not, offer a login button -->
@@ -167,18 +165,15 @@ document.getElementById("form").submit();
 //    echo $this->formSubmit($form->get('submit'));
 //    echo $this->form()->closeTag();
 //?>
-
+<form method="post" action='<?php echo $this->url("insertdb/insertdb");?>'>
 Id:<input type="text" id="id" name="id">
 first_name:<input type="text" id="first_name" name="first_name"><br>
 last_name:<input type="text" id="last_name" name="last_name"><br>
-interest:<input type="text" id="interest"><br>
-
-<form method="post" action="<?php $this->url('user/userdata'); ?>" id="form">
-  j:<input type="text" id="j" name="j">
-  <input type="button" onclick="formSubmit()" value="Submit form">
+<!--interest:<input type="text" id="interest"><br>-->
+<input type="submit" value="Add">
 </form>
-<?php $data = (isset($_POST["j"]))?$_POST["j"]:0;
-echo $data;?>
+
+
 
 
 

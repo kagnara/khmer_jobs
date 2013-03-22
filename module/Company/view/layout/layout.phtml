@@ -38,8 +38,21 @@
                 </div>
             </div>
         </div>
+		
         <div class="container">
+			<div class="row">
+			<div class="span4">
+				<ul class="nav">
+                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                 </ul>
+			</div>
+				
+			<div class="span8">
             <?php echo $this->content; ?>
+			</div>
+				
+		</div>
+		</div>
             <hr>
             <footer>
                 <p>&copy; 2005 - 2012 by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>

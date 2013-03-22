@@ -78,7 +78,21 @@ return array(
 								),
 							),
 						),
+                    'list' => array(
+			'type'    => 'segment',
+			'options' => array(
+				'route'    => '/list[/:action][/:id]',
+				'constraints' => array(
+					'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+					'id'     => '[0-9]+',
 				),
+				'defaults' => array(
+					'controller' => 'Company\Controller\Company',
+					'action'     => 'list',
+				),
+			),
+		),
+            ),
             ),
         ),
     ),
