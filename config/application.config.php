@@ -2,12 +2,16 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        //'Application',
-        //'User',
-		//'ZfcUser',
-        'Company',
-         'Job',
-	
+        'Application',
+       // 'User', for access data through linkend
+	//'ZfcUser',
+        //'Company',
+        // 'Job',
+        'User',
+	'ScnSocialAuth',
+        'ZfcBase',
+        'ZfcUser',
+        
 	
 		
     ),
