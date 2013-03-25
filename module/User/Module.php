@@ -1,6 +1,10 @@
 <?php
 namespace User;
-
+use User\Model\Userdata;
+use User\Model\UserdataTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Exception\InvalidQueryException;
 class Module
 {
     public function getAutoloaderConfig()
@@ -21,12 +25,12 @@ class Module
     {
         return array(
             'factories' => array(
-                'User\Model\Userdata' =>  function($sm) {
-                    $tableGateway = $sm->get('UserdataTable');
+                'User\Model\UserdataTable' =>  function($sm) {
+                    $tableGateway = $sm->get('UserdataTableGateway');
                     $table = new UserdataTable($tableGateway);
                     return $table;
                 },
-                'UserdataTable' => function ($sm) {
+                'UserdataTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Userdata());

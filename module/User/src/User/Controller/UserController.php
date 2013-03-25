@@ -1,35 +1,42 @@
 <?php
 namespace User\Controller;
 use \Zend\Mvc\Controller\AbstractActionController;
-use \Zend\View\Model\ViewModel;
-use \User\Form\UserdataForm;
 use \User\Model\Userdata;
 class UserController extends AbstractActionController {
+    protected $userdatatable;
     public function index(){
        
             $this->headScript()->appendFile('http://platform.linkedin.com/in.js');
-            
-//   
-//        $form = new UserdataForm();
-//        $form->get('submit')->setValue('Add');
-//        $request = $this->getRequest();
-//        if($request->isPost()){
-//            $Userdata = new Userdata();
-//            $Userdata->exchangeArray($form->getData());
-//            $this->getUserdataTable()->addtoDb($Userdata);
-//        }
+   
+              
     }
-    public function InsertdbAction(){
-       $this->id=$_POST['id'];
-       $this->first_name = $_POST['first_name'];
-       $this->last_name = $_POST['last_name'];
-            $Userdata = array(
-                'id'=>$this->id,
-                'first_name'=>$this->first_name,
-                'last_name'=>$this->last_name,
-                );
-            $this->UserdataTable()->addtoDb($Userdata);
-            return $this->redirect()->toRoute('/insertdb');
+    public function insertdbAction(){
+               $id=$_POST['id'];
+               $first_name=$_POST['first_name'];
+               $last_name =$_POST['last_name'];
+               $data=array(
+                   'id'=>$id,
+                   'first_name'=>$first_name,
+                   'last_name'=>$last_name,
+               );
+               $datas = new Userdata();
+               $datas->exchangeArray($data);
+               $this->getUserdataTable()->addtoDb($datas);
+               
+               //echo $id.",".$first_name.",".$last_name;
+//                $this->getUserdataTable()->addtoDb($data);
+//
+//                // Redirect to list of albums
+//                return $this->redirect()->toRoute('insertdb');
     }
+     
+    public function getUserdataTable()
+    {
+        if (!$this->userdatatable) {
+            $sm = $this->getServiceLocator();
+            $this->userdatatable= $sm->get('User\Model\UserdataTable');
+        }
+        return $this->userdatatable;
+    }
+    
 }
-?>

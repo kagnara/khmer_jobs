@@ -45,8 +45,8 @@ function setLoginBadge(profile) {
      edu_activities = new Array();
      edu_notes = new Array();
     id = profile.id;
-    last_name = profile.last_name;
-    first_name = profile.first_name;
+    last_name = profile.lastName;
+    first_name = profile.firstName;
     dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
   if (!profile) {
     profHTML = "<p>You are not logged in</p>";
@@ -128,15 +128,16 @@ function setLoginBadge(profile) {
     profHTMl = profHTML + "Date of Birth : "+dateOfBirth+"<br>";
     profHTML = profHTMl + "</p>";
   }
+
   document.getElementById("loginbadge").innerHTML = profHTML;
   document.getElementById("id").value = id;
   document.getElementById("first_name").value=first_name;
   document.getElementById("last_name").value = last_name;
   document.getElementById("interest").value = interest;
-//  document.getElementById("j").value =j;
-//  document.getElementById("j").submit();
-}
 
+ 
+
+}
 </script>
 
 <!-- need to be logged in to use; if not, offer a login button -->
@@ -153,29 +154,24 @@ function setLoginBadge(profile) {
 <a href="<?php echo $this->url('zfcuser/logout') ?>">[Sign Out]</a>
 <!--<div style="clear:both;"></div>-->
 
-//<?php
-//    $form = $this->form;
-//    echo $form;
-//    $form->setAtrribute('action',$this->url('user',array('action'=>'index')));
-//    $form->prepare();
-//    echo $this->form()->openTag($form);
-//    echo $this->formRow($form->get('id'));
-//    echo $this->formRow($form->get('first_name'));
-//    echo $this->formRow($form->get('last_name'));
-//    echo $this->formSubmit($form->get('submit'));
-//    echo $this->form()->closeTag();
-//?>
-<form method="post" action='<?php echo $this->url("insertdb/insertdb");?>'>
-Id:<input type="text" id="id" name="id">
-first_name:<input type="text" id="first_name" name="first_name"><br>
-last_name:<input type="text" id="last_name" name="last_name"><br>
-<!--interest:<input type="text" id="interest"><br>-->
-<input type="submit" value="Add">
+<?php
+//$form = $this->form;
+//$form->setAttribute('action', $this->url('user', array('action' => 'Insertdb')));
+//$form->prepare();
+//
+//echo $this->form()->openTag($form);
+//echo $this->formRow($form->get('id'));
+//echo $this->formRow($form->get('first_name'));
+//echo $this->formRow($form->get('last_name'));
+//echo $this->formSubmit($form->get('submit'));
+//echo $this->form()->closeTag();
+?>
+<form method="post" action="<?php echo $this->url('insertdb');?>">
+    <input type="text" id="id" name="id">
+    <input type="text" id="first_name" name="first_name">
+    <input type="text" id="last_name" name="last_name">
+    <input type="submit" value="Add">
 </form>
-
-
-
-
 
 
 

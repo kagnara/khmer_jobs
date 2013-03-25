@@ -3,7 +3,7 @@ namespace User;
 use Zend\Form\Form;
 class UserdataForm extends Form{
     public function __construct($name = null) {
-        parent::__construct('album');
+        parent::__construct('user');
         $this->setAttribute('method', 'post');
         $this->add(array('name'=>'id',
                           'attributes'=>array(
