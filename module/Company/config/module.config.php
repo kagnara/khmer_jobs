@@ -36,48 +36,48 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-					'post' => array(
-						'type'    => 'segment',
-							'options' => array(
-								'route'    => '/post[/:action][/:id]',
-								'constraints' => array(
-									'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-									'id'     => '[0-9]+',
-								),
-								'defaults' => array(
-									'controller' => 'Company\Controller\Company',
-									'action'     => 'post',
-								),
-							),
-						),
-					'add' => array(
-						'type'    => 'segment',
-							'options' => array(
-								'route'    => '/add[/:action][/:id]',
-								'constraints' => array(
-									'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-									'id'     => '[0-9]+',
-								),
-								'defaults' => array(
-									'controller' => 'Company\Controller\Company',
-									'action'     => 'add',
-								),
-							),
-						),
-					'edit' => array(
-						'type'    => 'segment',
-							'options' => array(
-								'route'    => '/edit[/:action][/:id]',
-								'constraints' => array(
-									'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-									'id'     => '[0-9]+',
-								),
-								'defaults' => array(
-									'controller' => 'Company\Controller\Company',
-									'action'     => 'edit',
-								),
-							),
-						),
+			'post' => array(
+                            'type'    => 'segment',
+				'options' => array(
+					'route'    => '/post[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'Company\Controller\Company',
+						'action'     => 'post',
+					),
+				),
+			),
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'Company\Controller\Company',
+						'action'     => 'add',
+					),
+				),
+			),
+			'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'Company\Controller\Company',
+						'action'     => 'edit',
+					),
+				),
+			),
                     'list' => array(
 			'type'    => 'segment',
 			'options' => array(
