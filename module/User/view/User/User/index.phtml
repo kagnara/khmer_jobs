@@ -133,9 +133,22 @@ function setLoginBadge(profile) {
   document.getElementById("id").value = id;
   document.getElementById("first_name").value=first_name;
   document.getElementById("last_name").value = last_name;
+  document.getElementById("dateofBirth").value=dateofBirth;
+  for(var i=0;i<j;i++){
+  document.getElementById("pos_title").value=pos_title[i];
+  document.getElementById("pos_company").value=pos_company[i];
+  document.getElementById("pos_date").value=pos_date[i];
+  document.getElementById("pos_summary").value=pos_summary[i];
+  }
+  for(var i=0;i<k;i++){
+  document.getElementById("edu_schoolName").value=edu_schoolName[i];
+  document.getElementById("edu_fieldofstudy").value=edu_fieldOfStudy[i];
+  document.getElementById("edu_date").value=edu_date[i];
+  document.getElementById("edu_degree").value=edu_degree[i];
+  document.getElementById("edu_activities").value=edu_activities[i];
+  document.getElementById("edu_note").value=edu_notes[i];
+  }
   document.getElementById("interest").value = interest;
-
- 
 
 }
 </script>
@@ -154,26 +167,24 @@ function setLoginBadge(profile) {
 <a href="<?php echo $this->url('zfcuser/logout') ?>">[Sign Out]</a>
 <!--<div style="clear:both;"></div>-->
 
-<?php
-//$form = $this->form;
-//$form->setAttribute('action', $this->url('user', array('action' => 'Insertdb')));
-//$form->prepare();
-//
-//echo $this->form()->openTag($form);
-//echo $this->formRow($form->get('id'));
-//echo $this->formRow($form->get('first_name'));
-//echo $this->formRow($form->get('last_name'));
-//echo $this->formSubmit($form->get('submit'));
-//echo $this->form()->closeTag();
-?>
 <form method="post" action="<?php echo $this->url('insertdb');?>">
     <input type="text" id="id" name="id">
     <input type="text" id="first_name" name="first_name">
     <input type="text" id="last_name" name="last_name">
+    <input type="text" id="dateofBirth" name="dateofBirth">
+    <input type="text" id="pos_title" name="pos_title">
+    <input type="text" id="pos_company" name="pos_company">
+    <input type="text" id="pos_date" name="pos_date">
+    <input type="text" id="pos_summary" name="pos_summary">
+    <input type="text" id="edu_schoolName" name="edu_schoolName">
+    <input type="text" id="edu_fieldofstudy" name="edu_fieldofstudy">
+    <input type="text" id="edu_date" name="edu_date">
+    <input type="text" id="edu_degree" name="edu_degree">
+    <input type="text" id="edu_activities" name="edu_activities">
+    <input type="text" id="edu_note" name="edu_note">
+    <input type="textn" id="interest" name="interest">
     <input type="submit" value="Add">
 </form>
-
-
 
 
 
