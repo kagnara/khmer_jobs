@@ -3,17 +3,14 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
-       // 'User', for access data through linkend
-	//'ZfcUser',
-        //'Company',
-        // 'Job',
-        'User',
-	'ScnSocialAuth',
-        'ZfcBase',
-        'ZfcUser',
+//         'Job',
         
 	
-		
+        'ZfcBase',
+        'ZfcUser',
+        'ScnSocialAuth',
+        'User',
+//        'Album',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

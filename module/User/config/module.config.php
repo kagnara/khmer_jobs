@@ -1,5 +1,48 @@
 <?php
 return array(
+    
+    'navigation' => array(
+       'supervisor' => array(
+           'admin' => array(
+               'label' => "admin",
+               'route' => '/userdata',
+//               'pages' => array(
+//                   'vieweachproject' => array(
+//                       'label' => 'vieweachproject',
+//                       'route' => 'student-project',
+//                   ), 
+//                   'comment' => array(
+//                       'label' => 'comment',
+//                       'route' => 'commentsupervisor',
+//                   ),
+//                   'calendarsStudent' => array(
+//                       'label' => 'calendarsStudent',
+//                       'route' => 'calendarsStudent',
+//                   ),
+               ),
+           ),
+        
+           'profile' => array(
+               'label' => 'Profile',
+               'route' => 'zfcuser',
+               'pages' => array(
+                   'create' => array(
+                       'label' => 'Profile',
+                       'route' => 'zfcuser/user/index',
+                   ),
+                   'changeemail' => array(
+                       'label' => 'Profile',
+                       'route' => 'zfcuser/changeemail',
+                   ),
+                   'changepassword' => array(
+                       'label' => 'Profile',
+                       'route' => 'zfcuser/changepassword',
+                   ),
+               ),
+           ),
+       ),
+    
+    
     'controllers' => array(
         'invokables' => array(
             'User\Controller\User' => 'User\Controller\UserController',
@@ -24,32 +67,33 @@ return array(
             'insertdb' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/insertdb',
+                    'route'    => '/showdb',
                     'constraints' => array(
                         'action' => 'index',
                        
                     ),
                     'defaults' => array(
                         'controller' => 'User\Controller\User',
-                        'action'     => 'insertdb',
+                        'action'     => 'showdb',
                     ),
                 ),
             ),
-            
-            'facebook' => array(
+            'showdetail' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/fblogin',
+                    'route'    => '/showdetail[/][:id]',
                     'constraints' => array(
                         'action' => 'index',
                        
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Facebook',
-                        'action'     => 'index',
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'showdetail',
                     ),
                 ),
             ),
+            
+           
         ),
     ),
     'controllers' => array(

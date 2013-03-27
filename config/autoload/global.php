@@ -2,6 +2,15 @@
 
 // config/autoload/global.php:
 return array(
+        
+     'service_manager' => array(
+         'factories' => array(
+             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+         ),
+     ),
+     // ...
+    
+    
 	'service_manager' => array(
 		'factories' => array(
 			'Zend\Db\Adapter\Adapter'

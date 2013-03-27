@@ -63,7 +63,9 @@ class UserController extends AbstractActionController
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             return $this->redirect()->toRoute(static::ROUTE_LOGIN);
         }
-        return $this->redirect()->toUrl('/userdata');
+//         $iden=$this->zfcUserIdentity()->getDisplayname();
+//         var_dump($iden);
+        return  $this->layout('layout/supervisor');
     }
 
     /**

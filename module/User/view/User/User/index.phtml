@@ -14,7 +14,6 @@ function onLinkedInLoad() {
   IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
 }
 setLoginBadge(true);
-alert(j+","+k);
 function onLinkedInLogout() {
   setLoginBadge(false);
 }
@@ -47,25 +46,30 @@ function setLoginBadge(profile) {
     id = profile.id;
     last_name = profile.lastName;
     first_name = profile.firstName;
-    dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
+  if((profile.dateOfBirth != null)){
+        dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
+    }else{
+    dateOfBirth = "<i>Unknow</i>"
+    }
+     j=profile.positions._total;
+     k=profile.educations._total;
   if (!profile) {
     profHTML = "<p>You are not logged in</p>";
   }
   else {
     
-     j=profile.positions._total;
-     k=profile.educations._total;
+    
     for (var i=0;i<j;i++){
         
         pos_title[i] = profile.positions.values[i].title;
         pos_company[i] = profile.positions.values[i].company.name;
         //alert(profile.positions.values[0].endDate);
         if((profile.positions.values[i].startDate == null)&&(profile.positions.values[i].endDate != null)){
-            pos_date[i]="FROM <i>Unknow</i> TO <i>"+profile.positions.values[i].endDate.month +"-"+profile.positions.values[i].endDate.year +"</i>";
+            pos_date[i]="0/0/00-"+"0/"+profile.positions.values[i].endDate.month +"/"+profile.positions.values[i].endDate.year;
         }else if((profile.positions.values[i].startDate != null)&&(profile.positions.values[i].endDate == null)){
-             pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> TO <i>Unknow</i>";
+             pos_date[i]="0/"+profile.positions.values[i].startDate.month +"/"+ profile.positions.values[i].startDate.year+"-0/0/00";
         }else if((profile.positions.values[i].startDate != null)&&(profile.positions.values[i].endDate != null)){
-            pos_date[i]="FROM <i>"+ profile.positions.values[i].startDate.month +"-"+ profile.positions.values[i].startDate.year+"</i> To <i>"+profile.positions.values[i].endDate.month +"-"+profile.positions.values[i].endDate.year+"</i>";
+            pos_date[i]="0/"+profile.positions.values[i].startDate.month +"/"+ profile.positions.values[i].startDate.year+"-0/"+profile.positions.values[i].endDate.month +"/"+profile.positions.values[i].endDate.year;
         }else{
             pos_date[i]="<i>Unknow</i>";
         }
@@ -78,11 +82,11 @@ function setLoginBadge(profile) {
         edu_fieldOfStudy[i] =profile.educations.values[i].fieldOfStudy;
         
         if((profile.educations.values[i].startDate == null)&&(profile.educations.values[i].endDate != null)){
-            edu_date[i] ="FROM <i>Unknow</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+            edu_date[i] ="0/0/00-"+profile.educations.values[i].endDate.year;
         }else if((profile.educations.values[i].endDate == null)&&(profile.educations.values[i].startDate != null)){
-             edu_date[i] ="FROM <i>Unknow</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+             edu_date[i] =profile.educations.values[i].endDate.year+"-0/0/00";
         }else if ((profile.educations.values[i].startDate != null)&&(profile.educations.values[i].endDate != null)){
-            edu_date[i] ="FROM <i>"+profile.educations.values[i].startDate.year+"</i> TO <i>"+profile.educations.values[i].endDate.year+"</i>";
+            edu_date[i] =profile.educations.values[i].startDate.year+"-"+profile.educations.values[i].endDate.year;
         }else{
             edu_date[i]="<i>Unknow</i>"
         }
@@ -93,18 +97,15 @@ function setLoginBadge(profile) {
     }
     //additional info
      interest = profile.interests;
-    if((profile.dateOfBirth != null)){
-        dateOfBirth = profile.dateOfBirth.day+"-"+profile.dateOfBirth.month+"-"+profile.dateOfBirth.year;
-    }else{
-    dateOfBirth = "<i>Unknow</i>"
-    }
-    var pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
+     pictureUrl = profile.pictureUrl || "http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png";
     //profHTML = "<p><a href=\"" + profile.publicProfileUrl + "\">";
     profHTML = "<p><img src=\"" + pictureUrl + "\"></a>&nbsp";      
-    profHTML = profHTML + first_name + " " +last_name + "</a><br> <a onclick=\"IN.User.logout(); return false;\">logout</a>";
+    profHTML = profHTML + first_name + " " +last_name;
+//    "<a onclick=\"IN.User.logout(); return false;\">logout</a>";
     profHTML = profHTML + "<hr width=600px align='left'>";
     profHTML = profHTML + "<h2>EXPERIENCES</h2>";
     for(var i=0;i<j;i++){
+      
         profHTML = profHTML + "<b>"+pos_title[i]+"</b><br>";
         profHTML = profHTML + pos_company[i]+"<br>";
         profHTML = profHTML + "DATE : "+pos_date[i]+"<br>";
@@ -115,40 +116,59 @@ function setLoginBadge(profile) {
     profHTML = profHTML + "<h2>EDUCATION</h2>";
     for(var i=0;i<k;i++){
         profHTML = profHTML + "<b>"+edu_schoolName[i]+"</b><br>";
-        profHTML = profHTML + "Field of Study : "+edu_fieldOfStudy[i]+"<br>";
+        profHTML = profHTML + "FIELD OF STUDY : "+edu_fieldOfStudy[i]+"<br>";
         profHTML = profHTML + "DATE : "+edu_date[i]+"<br>";
-        profHTML = profHTML + "Degree : "+edu_degree[i]+"<br>";
+        profHTML = profHTML + "DEGREE : "+edu_degree[i]+"<br>";
         profHTML = profHTML + "ACTIVITIES : <div style='width:550px; padding-left:40px;'>"+edu_activities[i]+"</div>";
         profHTML = profHTML + "NOTES : <div style='width:550px; padding-left:40px;'>"+edu_notes[i]+"</div>";
         profHTML = profHTML +"<br>";
     }
     profHTML = profHTML + "<hr width=600px align='left'>";
     profHTML = profHTML + "<h2>ADDITIONAL INFORMATION</h2>";
-    profHTML = profHTML + "Interest : "+interest+"<br>";
-    profHTMl = profHTML + "Date of Birth : "+dateOfBirth+"<br>";
-    profHTML = profHTMl + "</p>";
+    profHTML = profHTML + "INTEREST : "+interest+"<br>";
+    profHTML = profHTML + "DATE OF BIRTH : "+dateOfBirth+"<br><br>";
+    profHTML = profHTML + "<form method='post' action="+'showdb'+">";
+    profHTML = profHTML + "<input type='text' id='pic' name='pic' value='"+pictureUrl+"'>";
+    profHTML =profHTML + "<input type='hidden' id='id' name='id' value='"+id+"'>";
+    profHTML =profHTML + "<input type='hidden' id='first_name' name='first_name' value='"+first_name+"'>";
+    profHTML =profHTML + "<input type='hidden' id='last_name' name='last_name' value='"+last_name+"'>";
+    profHTML =profHTML + "<input type='hidden' id='dateOfBirth' name='dateOfBirth' value="+dateOfBirth+">";
+    profHTML =profHTML + "<input type='hidden' id='pos_title' name='pos_title' value='"+pos_title+"'>";
+    profHTML =profHTML + "<input type='hidden' id='pos_company' name='pos_company' value='"+pos_company+"'>";
+    profHTML =profHTML + "<input type='hidden' id='pos_date' name='pos_date' value='"+pos_date+"'>";
+    profHTML =profHTML + "<input type='hidden' id='pos_summary' name='pos_summary' value='"+pos_summary+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_schoolName' name='edu_schoolName' value='"+edu_schoolName+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_fieldOfStudy' name='edu_fieldOfStudy' value='"+edu_fieldOfStudy+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_date' name='edu_date' value='"+edu_date+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_degree' name='edu_degree' value='"+edu_degree+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_activities' name='edu_activities' value='"+edu_activities+"'>";
+    profHTML =profHTML + "<input type='hidden' id='edu_note' name='edu_note' value='"+edu_notes+"'>";
+    profHTML =profHTML + "<input type='hidden' id='interest' name='interest' value='"+interest+"'>";
+    profHTML =profHTML + "<input type='submit' value='ADD'>";
+    profHTML =profHTML + "</form>";
   }
 
   document.getElementById("loginbadge").innerHTML = profHTML;
-  document.getElementById("id").value = id;
-  document.getElementById("first_name").value=first_name;
-  document.getElementById("last_name").value = last_name;
-  document.getElementById("dateofBirth").value=dateofBirth;
-  for(var i=0;i<j;i++){
-  document.getElementById("pos_title").value=pos_title[i];
-  document.getElementById("pos_company").value=pos_company[i];
-  document.getElementById("pos_date").value=pos_date[i];
-  document.getElementById("pos_summary").value=pos_summary[i];
-  }
-  for(var i=0;i<k;i++){
-  document.getElementById("edu_schoolName").value=edu_schoolName[i];
-  document.getElementById("edu_fieldofstudy").value=edu_fieldOfStudy[i];
-  document.getElementById("edu_date").value=edu_date[i];
-  document.getElementById("edu_degree").value=edu_degree[i];
-  document.getElementById("edu_activities").value=edu_activities[i];
-  document.getElementById("edu_note").value=edu_notes[i];
-  }
-  document.getElementById("interest").value = interest;
+//  document.getElementById("bo").innerHTML =
+//  document.getElementById("id").value = id;
+//  document.getElementById("first_name").value=first_name;
+//  document.getElementById("last_name").value = last_name;
+//  document.getElementById("dateofBirth").value=dateOfBirth;
+//  for(var i=0;i<j;i++){
+//  document.getElementById("pos_title").value=pos_title[i];
+//  document.getElementById("pos_company").value=pos_company[i];
+//  document.getElementById("pos_date").value=pos_date[i];
+//  document.getElementById("pos_summary").value=pos_summary[i];
+//  }
+//  for(var i=0;i<k;i++){
+//  document.getElementById("edu_schoolName").value=edu_schoolName[i];
+//  document.getElementById("edu_fieldofstudy").value=edu_fieldOfStudy[i];
+//  document.getElementById("edu_date").value=edu_date[i];
+//  document.getElementById("edu_degree").value=edu_degree[i];
+//  document.getElementById("edu_activities").value=edu_activities[i];
+//  document.getElementById("edu_note").value=edu_notes[i];
+//  }
+//  document.getElementById("interest").value = interest;
 
 }
 </script>
@@ -166,8 +186,8 @@ function setLoginBadge(profile) {
 <h3>Hello, <?php //echo $this->zfcUserDisplayName() ?>!</h3>-->
 <a href="<?php echo $this->url('zfcuser/logout') ?>">[Sign Out]</a>
 <!--<div style="clear:both;"></div>-->
-
-<form method="post" action="<?php echo $this->url('insertdb');?>">
+<!--
+<form method="post" action="<?php //echo $this->url('insertdb');?>">
     <input type="text" id="id" name="id">
     <input type="text" id="first_name" name="first_name">
     <input type="text" id="last_name" name="last_name">
@@ -182,11 +202,14 @@ function setLoginBadge(profile) {
     <input type="text" id="edu_degree" name="edu_degree">
     <input type="text" id="edu_activities" name="edu_activities">
     <input type="text" id="edu_note" name="edu_note">
-    <input type="textn" id="interest" name="interest">
+    <input type="text" id="interest" name="interest">
+    <input type="text" id="dateofBirth" name="dateofBirth">
     <input type="submit" value="Add">
-</form>
-
-
+</form>-->
+<?php
+$iden=$this->zfcUserIdentity()->getId();
+var_dump($iden);
+?>
 
 
 
